@@ -2439,7 +2439,7 @@ div {
           }
           updateSlideClasses(); 
         }
-        
+
         var getSlideEl = function(slideNo) {
           if (slideNo > 0) {
             return slides[slideNo - 1];
@@ -2447,7 +2447,7 @@ div {
             return null;
           }
         }
-        
+
         var getSlideTitle = function(slideNo) {
           var el = getSlideEl(slideNo);
           
@@ -2498,9 +2498,19 @@ div {
           }
           notesOn = (notesOn) ? false:true;
         }
-        
+
+        var switch3D = function() {
+          if (document.body.className.indexOf('three-d') == -1) {
+            document.getElementsByClassName('presentation')[0].style.webkitPerspective = '1000px';
+            document.body.className += ' three-d';
+          } else {
+            window.setTimeout("document.getElementsByClassName('presentation')[0].style.webkitPerspective = '0';", 2000);
+            document.body.className = document.body.className.replace(/three-d/, '');
+          }
+        }
+
         var handleBodyKeyDown = function(event) {
-          console.log(event.keyCode);
+          // console.log(event.keyCode);
           switch (event.keyCode) {
             case 37: // left arrow
               prevSlide();
@@ -2511,6 +2521,9 @@ div {
               break;
             case 50: // 2
               showNotes();          
+              break;
+            case 51: // 3
+              switch3D();          
               break;
           }
         }

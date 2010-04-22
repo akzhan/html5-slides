@@ -2377,7 +2377,11 @@ div {
     
     <script>
       (function() {
+        // Since we don't have the fallback of attachEvent and
+	// other IE only stuff we won't try to run JS for IE.
+	// It will run though when using Google Chrome Frame
         if (document.all) { return; }
+
         var currentSlideNo;
         var notesOn = false;
         var slides = document.getElementsByClassName('slide');

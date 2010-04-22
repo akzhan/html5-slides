@@ -2377,6 +2377,7 @@ div {
     
     <script>
       (function() {
+        if (document.all) { return; }
         var currentSlideNo;
         var notesOn = false;
         var slides = document.getElementsByClassName('slide');
@@ -2408,7 +2409,7 @@ div {
 
         var trim = function(str) {
           return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-        }
+        };
 
         var addClass = function(node, classStr) {
           classStr = str2array(classStr);
@@ -2420,7 +2421,7 @@ div {
             }
           }
           node.className = trim(cls);
-        }
+        };
 
         var removeClass = function(node, classStr) {
           var cls;
@@ -2437,26 +2438,7 @@ div {
           if (node.className != cls) {
             node.className = cls;
           }
-        }
-
-        var initialize = function() {
-          if (window.location.hash != "") {
-            currentSlideNo = Number(window.location.hash.replace('#slide', ''));
-          } else {
-            currentSlideNo = 1;
-          }
-   
-          document.addEventListener('keydown', handleBodyKeyDown, false);
-   
-          var els = slides;
-          for (var i = 0, el; el = els[i]; i++) {
-            addClass(el, 'slide far-future');
-          }
-          updateSlideClasses(); 
-
-          // add support for finger events (filter it by property detection?)
-          addTouchListeners();
-        }
+        };
 
         var getSlideEl = function(slideNo) {
           if (slideNo > 0) {
@@ -2464,7 +2446,7 @@ div {
           } else {
             return null;
           }
-        }
+        };
 
         var getSlideTitle = function(slideNo) {
           var el = getSlideEl(slideNo);
@@ -2474,7 +2456,7 @@ div {
           } else {
             return null;
           }
-        }
+        };
         
         var changeSlideElClass = function(slideNo, className) {
           var el = getSlideEl(slideNo);
@@ -2483,7 +2465,7 @@ div {
             removeClass(el, 'far-past past current future far-future');
             addClass(el, className);
           }
-        }
+        };
         
         var updateSlideClasses = function() {
           window.location.hash = "slide" + currentSlideNo;
@@ -2492,7 +2474,7 @@ div {
           changeSlideElClass(currentSlideNo, 'current');
           changeSlideElClass(currentSlideNo + 1, 'future');
           changeSlideElClass(currentSlideNo + 2, 'far-future');                
-        }
+        };
         
         var nextSlide = function() {
           if (currentSlideNo < slides.length) {
@@ -2500,14 +2482,14 @@ div {
           }
           
           updateSlideClasses();
-        }
+        };
         
         var prevSlide = function() {
           if (currentSlideNo > 1) {
             currentSlideNo--;
           }
           updateSlideClasses();
-        }
+        };
         
         var showNotes = function() {
           var notes = document.querySelectorAll('.notes');
@@ -2515,7 +2497,7 @@ div {
             notes[i].style.display = (notesOn) ? 'none':'block';
           }
           notesOn = (notesOn) ? false:true;
-        }
+        };
 
         var switch3D = function() {
           if (document.body.className.indexOf('three-d') == -1) {
@@ -2525,7 +2507,7 @@ div {
             window.setTimeout("document.getElementsByClassName('presentation')[0].style.webkitPerspective = '0';", 2000);
             document.body.className = document.body.className.replace(/three-d/, '');
           }
-        }
+        };
 
         var handleBodyKeyDown = function(event) {
           // console.log(event.keyCode);
@@ -2544,7 +2526,7 @@ div {
               switch3D();          
               break;
           }
-        }
+        };
 
         var addTouchListeners = function() {
           document.addEventListener('touchstart', function(e) {
@@ -2562,8 +2544,32 @@ div {
           }, false);
         };
 
-        initialize();
+        // initialize
+
+        (function() {
+          if (window.location.hash != "") {
+            currentSlideNo = Number(window.location.hash.replace('#slide', ''));
+          } else {
+            currentSlideNo = 1;
+          }
+   
+          document.addEventListener('keydown', handleBodyKeyDown, false);
+   
+          var els = slides;
+          for (var i = 0, el; el = els[i]; i++) {
+            addClass(el, 'slide far-future');
+          }
+          updateSlideClasses(); 
+
+          // add support for finger events (filter it by property detection?)
+          addTouchListeners();
+        })();
       })();
     </script>
+
+    <!--[if IE]>
+		<script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script> 
+		<script>CFInstall.check({ mode: "overlay" });</script> 
+    <![endif]--> 
 </body>
 </html>

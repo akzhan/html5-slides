@@ -1,5 +1,5 @@
 // this whole script won't have access to the dom either
-importScripts('/html5/src/webworkers/annealing.js');
+importScripts('annealing.js');
 
 var annealing = new Annealing();
 

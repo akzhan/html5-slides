@@ -722,7 +722,7 @@ CACHE:
 </pre>
 
 
-            <p style="padding-top: 20px; text-align: center;">Turn off your internet connection and refresh! <img src="/html5/src/refresh.png" /></p>
+            <p style="padding-top: 20px; text-align: center;">Turn off your internet connection and refresh! <img src="src/refresh.png" /></p>
           </section>
         </div>        
 
@@ -739,8 +739,8 @@ extra_work.js:
   // do some work; when done post message.
   <b>postMessage</b>(some_data);
 </pre>
-        <script src="/html5/src/webworkers/points.js" type="text/javascript" charset="utf-8"></script>
-        <script src="/html5/src/webworkers/annealing.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/webworkers/points.js" type="text/javascript" charset="utf-8"></script>
+        <script src="src/webworkers/annealing.js" type="text/javascript" charset="utf-8"></script>
 
 
 <!-- <input type="button" value="Find primes with Workers" onClick="findPrimesYes()"> 
@@ -787,13 +787,12 @@ function findPrimesYes() {
             if (event.target.id == 'find_route_y') {
               useThreads = true;
               document.getElementById('w_loading').style.visibility = 'visible'
-              test()    
-                    
+              test();
             }
             else if (event.target.id == 'find_route_n'){
               useThreads = false;
               document.getElementById('w_loading').style.visibility = 'visible'
-              test()            
+              setTimeout(function() { test(); }, 10);
             }
             // useThreads = document.getElementById("worker").checked;
 
@@ -811,7 +810,7 @@ function findPrimesYes() {
         
         function drawPoints() {
           var blueIcon = new GIcon(G_DEFAULT_ICON);
-          blueIcon.image = "http://apirocks.com/html5/src/webworkers/point.png";
+          blueIcon.image = "src/webworkers/point.png";
           blueIcon.iconSize = new GSize(3, 3);
           blueIcon.iconAnchor = new GPoint(0, 0);    
           blueIcon.shadow = null;
@@ -848,7 +847,7 @@ function findPrimesYes() {
               };
               var a;
               if (useThreads) {
-                  var worker = new Worker('/html5/src/webworkers/Worker.js')
+                  var worker = new Worker('src/webworkers/Worker.js')
                   worker.onmessage = function(event) {
                       var returnedData = JSON.parse(event.data);
                       var msg = returnedData[0];
@@ -2190,9 +2189,9 @@ document.getElementById('box').className = 'right'; <button onclick="transitionR
 }
 </pre>
 
-<info>
-  Now press <span class="key">3</span>!
-</info>
+          <info>
+            Now press <span class="key">3</span>!
+          </info>
 
           </section>
         </div>
@@ -2221,9 +2220,9 @@ div {
   -webkit-<b>animation-direction</b>: alternate;
 }
 </pre>
-<p style="font-size: 10px">
-  *Please make a better use of it. We don't want a new blink tag ;)
-</p>            
+        <p style="font-size: 10px">
+          *Please make a better use of it. We don't want a new blink tag ;)
+        </p>            
 
             <style>
               @-webkit-keyframes pulse {
@@ -2263,60 +2262,6 @@ div {
             </li></ul>
           </section>
         </div>
-
-
-
-        
-        <!-- <div class="slide">
-          <header>Mix it up</header>
-            <section>
-            <div style="float:left; margin:5px 0px 0px 20px">
-              <video id="clip2" width="390" style="-webkit-box-reflect:below 1px; border: solid 3px black; float:left;" controls>
-                <source src="./src/chrome_japan.mp4" type="video/mp4">
-                Your browser does not support the video tag
-              </video>
-              <div id="subDiv2" contenteditable="true">Subtitles here</div>
-              <div>
-                <input type=button id="play_button" onclick="PlayVideo()"; value="Play" disabled />
-                <input type=button id="pause_button" onclick="PauseVideo()"; value="Pause" disabled />    
-                <input type=button id="mute" onclick="Mute()"; value="Mute" />
-                <input type=button id="unmute" onclick="Unmute()"; value="Unmute" />
-              </div>    
-            </div>
-          </section>
-          <style>
-          #subDiv { font: 35% "Lucida Grande", "Trebuchet MS"; margin: 0; padding: 0; color: white; position: relative; top: -50px; width: 400px; }
-          </style>
-          <script>
-            var subtitles = {
-              "5": "This video has subtitles BUT this subtitles are made with HTML5",
-              "10": "So this is real text you can select",
-              "15": "And you can even pause the video and edit the subtitles!"
-            }
-            for (var timesKey in subtitles) {
-              if (!localStorage[timesKey]) {
-                localStorage[timesKey] = subtitles[timesKey];
-              }
-            }
-            var subtitlesInterval = null;
-            var subDiv = document.getElementById('subDiv2');
-            subDiv.addEventListener('keyup', function() {
-              localStorage[this.className] = this.innerHTML;
-            }, false);
-            clip2.addEventListener('ended', OnFinished, false);
-            clip2.addEventListener('play', function() {
-              subtitlesInterval = setInterval(function() {
-                for (var times in subtitles) {
-                  if (clip2.currentTime < times) {
-                    subDiv.innerHTML = localStorage[times];
-                    subDiv.className = times;
-                    break;
-                  }
-                }
-              }, 500)
-            }, false);
-          </script>
-        </div> -->
         
 
         <div class="slide">
@@ -2344,15 +2289,15 @@ div {
             <ul class="bullets">
               <li>Minimal effort for bringing IE6, 7 and 8 up to the latest HTML5 technologies
               </li>
-	      <li>Two ways to get your websites ready for Chrome Frame:
-	      </li>
+      	      <li>Two ways to get your websites ready for Chrome Frame:
+      	      </li>
 					  
-		</ul>
-			<p>Client side: <pre>&lt;meta http-equiv="X-UA-Compatible" content="chrome=1"></pre></p>
-			<p>Server side: <pre>X-UA-Compatible: chrome=1</pre></p>
-			<p style="font-size: 30px">
-        Try to load this presentation in IE!
-      </p>            
+        		</ul>
+      			<p>Client side: <pre>&lt;meta http-equiv="X-UA-Compatible" content="chrome=1"></pre></p>
+      			<p>Server side: <pre>X-UA-Compatible: chrome=1</pre></p>
+      			<p style="font-size: 30px">
+              Try to load this presentation in IE!
+            </p>            
           </section>
         </div>
 

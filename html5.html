@@ -361,6 +361,9 @@
         -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
         -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px; 
       }
+      
+      .key { font-family: Arial; }
+      
       :not(header) > .css,
       :not(header) > .js,
       :not(header) > .html,
@@ -792,10 +795,9 @@ function findPrimesYes() {
             else if (event.target.id == 'find_route_n'){
               useThreads = false;
               document.getElementById('w_loading').style.visibility = 'visible'
+              // this setTimout is so that we see the 'loading' label
               setTimeout(function() { test(); }, 10);
             }
-            // useThreads = document.getElementById("worker").checked;
-
           }, false);
         }
         

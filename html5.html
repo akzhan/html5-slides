@@ -1226,18 +1226,18 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
           <header><span class='html'>HTML</span> <h1>New link relations</h1></header> 
 
           <section> 
-            <pre>&lt;link rel='alternate'&gt;
-&lt;link rel='icon'&gt;
-&lt;link rel='nofollow'&gt;
-&lt;link rel='prefetch'&gt;
+            <pre>&lt;link rel='alternate' type="application/rss+xml" href="http://myblog.com/feed" /&gt;
+&lt;link <b>rel='icon'</b> href="/favicon.ico" /&gt;
+&lt;link <b>rel='pingback'</b> href="http://myblog.com/xmlrpc.php"&gt;
+&lt;link <b>rel='prefetch'</b> href="http://myblog.com/main.php"&gt;
+...
 
-&lt;a <b>rel='archives'</b>&gt;
-&lt;a <b>rel='external'</b>&gt;
-&lt;a <b>rel='license'</b>&gt;
-&lt;a <b>rel='noreferrer'</b>&gt;
-&lt;a <b>rel='pingback'</b>&gt;
-&lt;a <b>rel='sidebar'</b>&gt;
-&lt;a <b>rel='tag'</b>&gt;
+&lt;a <b>rel='archives'</b> href="http://myblog.com/archives"&gt;old posts&lt;/a&gt;
+&lt;a <b>rel='external'</b> href="http://notmysite.com"&gt;tutorial&lt;/a&gt;
+&lt;a <b>rel='license'</b> href="http://www.apache.org/licenses/LICENSE-2.0"&gt;license&lt;/a&gt;
+&lt;a <b>rel='nofollow'</b> href="http://notmysite.com/sample"&gt;wannabe&lt;/a&gt;
+&lt;a <b>rel='tag'</b> href="http://myblog.com/category/games"&gt;games posts&lt;/a&gt;
+...
 </pre> 
 
           </section> 

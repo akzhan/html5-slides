@@ -1224,7 +1224,9 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
 
         <div class="slide"> 
           <header><span class='html'>HTML</span> <h1>New link relations</h1></header> 
-
+          <style type="text/css" media="screen">
+            .underlined { text-decoration: underline; }
+          </style>
           <section> 
             <pre>&lt;link rel='alternate' type="application/rss+xml" href="http://myblog.com/feed" /&gt;
 &lt;link <b>rel='icon'</b> href="/favicon.ico" /&gt;
@@ -1232,11 +1234,11 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
 &lt;link <b>rel='prefetch'</b> href="http://myblog.com/main.php"&gt;
 ...
 
-&lt;a <b>rel='archives'</b> href="http://myblog.com/archives"&gt;old posts&lt;/a&gt;
-&lt;a <b>rel='external'</b> href="http://notmysite.com"&gt;tutorial&lt;/a&gt;
-&lt;a <b>rel='license'</b> href="http://www.apache.org/licenses/LICENSE-2.0"&gt;license&lt;/a&gt;
-&lt;a <b>rel='nofollow'</b> href="http://notmysite.com/sample"&gt;wannabe&lt;/a&gt;
-&lt;a <b>rel='tag'</b> href="http://myblog.com/category/games"&gt;games posts&lt;/a&gt;
+&lt;a <b>rel='archives'</b> href="http://myblog.com/archives"&gt;<span class="underlined">old posts</span>&lt;/a&gt;
+&lt;a <b>rel='external'</b> href="http://notmysite.com"&gt;<span class="underlined">tutorial</span>&lt;/a&gt;
+&lt;a <b>rel='license'</b> href="http://www.apache.org/licenses/LICENSE-2.0"&gt;<span class="underlined">license</span>&lt;/a&gt;
+&lt;a <b>rel='nofollow'</b> href="http://notmysite.com/sample"&gt;<span class="underlined">wannabe</span>&lt;/a&gt;
+&lt;a <b>rel='tag'</b> href="http://myblog.com/category/games"&gt;<span class="underlined">games posts</span>&lt;/a&gt;
 ...
 </pre> 
 

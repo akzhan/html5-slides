@@ -997,12 +997,14 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
 }, false);
 </pre>
 <style type="text/css" media="screen">
-  #drag_zone { font-size: 30%; list-style: none; float: left; }
+  #drag_zone { font-size: 13px; list-style: none; float: left; }
   #drag_zone li * { border: 4px solid #888; display: block; }
   #drag_zone, #drop_zone, #drop_data { width: 20%; }
-  #drop_zone, #drop_data { padding: 40px; font-size: 30%; border: 5px solid #888; float: right; height: 240px; overflow: auto; }
+  #drop_zone, #drop_data { padding: 40px; font-size: 13px; border: 5px solid #888; float: right; height: 240px; overflow: auto; }
   #drop_zone.hovering { border: 5px solid #aaa; background-color: rgba(255, 0, 0, 0.199219); }
   #drop_data { background-color: #eee; font-family: Monospace; word-wrap: break-word; }
+  #drop_data p { font-size: 13px; }
+  .datatypes { font-weight: bold; }
 </style>
 <ol id="drag_zone">
  <li><img src="src/dwd1.png" draggable class="copy" /></li>
@@ -1040,7 +1042,6 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
   dropZone.addEventListener('dragenter', function(event) {
     if (event.preventDefault) event.preventDefault();
     event.dataTransfer.dropEffect = 'copy';
-    console.log(this)
     this.className = 'hovering';
     return false;
   }, false);
@@ -1059,23 +1060,24 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
     var imgPassed = null;
     var dropdata = document.querySelector('#drop_data');
     var types = event.dataTransfer.types;
-    document.querySelector('#drop_data').innerHTML = '';
-    this.innerText = '';
-    
+    document.querySelector('#drop_data').textContent = '';
+    this.innerHTML = '';
     for (var i = 0; i < types.length; i++) {
       if (types[i] == 'Files') {
         var files = event.dataTransfer.files;
         for (var j = 0; j < files.length; j++) {
-          dropdata.innerHTML += '<p><em>File Name</em>: '+files[j].fileName+'</p>';
-          dropdata.innerHTML += '<p><em>File Size</em>: '+files[j].fileSize+'</p>';
+          dropdata.textContent += 'File Name: '+files[j].fileName;
+          dropdata.textContent += 'File Size: '+files[j].fileSize;
         }
       }
       else {
-        dropdata.innerHTML += '<p><em>'+types[i]+'</em>: '+event.dataTransfer.getData(types[i])+'</p>';
+        if (typeof event.dataTransfer.getData(types[i]) !== 'undefined') {
+          dropdata.innerHTML += '<p><em class="datatypes">'+types[i]+'</em>: <br />'+event.dataTransfer.getData(types[i]).replace(/</g, '&lt;') + '</p>';
+        }
       }
 
-      if (event.dataTransfer.getData(types[i]) && event.dataTransfer.getData(types[i]).match(/png/)) {
-        imgPassed = event.dataTransfer.getData(types[i]);
+      if (types[i] == 'text/uri-list') {
+        imgPassed = event.dataTransfer.getData('text/uri-list');
       }
     }
     if (imgPassed) {
@@ -1085,11 +1087,18 @@ socket.<b>onclose</b> = function(event) { alert(“closed”); }
       var ctx = cEl.getContext('2d');
       var img_buffer = document.createElement('img');
       img_buffer.src = imgPassed;
+      img_buffer.style.display = 'none';
+      document.body.appendChild(img_buffer); // this line only needed in safari
       img_buffer.onload = function() { ctx.drawImage(img_buffer,0,0,100,100); }
       this.appendChild(cEl);
     }
     else {
-      this.innerHTML = event.dataTransfer.getData('text');
+      if (event.dataTransfer.getData('text')) {
+        this.innerHTML = event.dataTransfer.getData('text');
+      }
+      else if (event.dataTransfer.getData('text/plain')) {
+        this.innerHTML = event.dataTransfer.getData('text/plain');
+      }
     }
     return false;
   }, false);

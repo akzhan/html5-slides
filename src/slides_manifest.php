@@ -5,5 +5,5 @@ echo "CACHE MANIFEST\n";
 echo "# version 1\n";
 
 echo "CACHE:\n";
-echo "/html5/src/refresh2.png";
+echo "/html5/src/refresh4.png";
 ?>

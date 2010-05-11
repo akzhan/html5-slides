@@ -17,6 +17,7 @@
   Original slides: Marcin Wichary
   Modifications: Ernest Delgado
                  Alex Russell
+                 Brad Neuberg
 -->
 <html manifest="/html5/src/slides_manifest.php">
 <head>
@@ -1520,6 +1521,83 @@ document.getElementById("video").<b>play</b>();
           <section>
             <example style="margin-left: 150px; margin-top: 40px; padding: 0; width: 520px; height: 500px;">
               <iframe src="src/canvasphoto/index.html" scrolling="no" style="width: 520px; height: 500px; border: none; background: white"></iframe>
+            </example>
+          </section>
+        </div>
+        
+        <div class="slide" id="svg">
+          <header><span class="html">HTML</span> <h1>SVG in HTML5</h1></header>
+          <section>
+            <style>
+              #svg {
+                background: white;
+                border-radius: 8px;
+                border: 1px solid #bbb;
+              }
+            </style>
+
+            <pre>&lt;html&gt;
+  <b>&lt;svg&gt;
+    &lt;circle id="myCircle" class="important" cx="50%" cy="25%" r="100" 
+        fill="url(#myGradient)" stroke-color="red"
+        onmousedown="alert('hello');"/&gt;
+  &lt;/svg&gt;</b>
+&lt;/html&gt;</pre>
+
+            <div class="svg">
+            </div>
+
+          <script>
+            // insert SVG using script until SVG in HTML5 is more widely supported
+            // (currently supported in IE 9 and Firefox nightlies only)
+            window.addEventListener('DOMContentLoaded', function() {
+              var container = document.getElementsByClassName('svg')[0];
+              var svgns = 'http://www.w3.org/2000/svg';
+              var svg = document.createElementNS(svgns, 'svg');
+              
+              // our linearGradient
+              var defs = document.createElementNS(svgns, 'defs');
+              var gradient = document.createElementNS(svgns, 'linearGradient');
+              gradient.setAttribute('id', 'myGradient');
+              gradient.setAttribute('x1', '0%');
+              gradient.setAttribute('y1', '100%');
+              gradient.setAttribute('x2', '100%');
+              gradient.setAttribute('y2', '0%');
+              var stop = document.createElementNS(svgns, 'stop');
+              stop.setAttribute('offset', '5%');
+              stop.setAttribute('stop-color', 'red');
+              gradient.appendChild(stop);
+              stop = document.createElementNS(svgns, 'stop');
+              stop.setAttribute('offset', '95%');
+              stop.setAttribute('stop-color', 'blue');
+              stop.setAttribute('stop-opacity', '0.5');
+              gradient.appendChild(stop);
+              defs.appendChild(gradient);
+              svg.appendChild(defs);
+              
+              // our example circle
+              var circle = document.createElementNS(svgns, 'circle');
+              circle.setAttribute('cx', '50%');
+              circle.setAttribute('cy', '25%');
+              circle.setAttribute('r', 100);
+              circle.setAttribute('fill', 'url(#myGradient)');
+              circle.setAttribute('stroke-color', 'red');
+              circle.addEventListener('mousedown', function() {
+                alert('hello');
+              }, false);
+              svg.appendChild(circle);
+              container.appendChild(svg);
+            }, false);
+          </script>
+            
+          </section>
+        </div>
+        
+        <div class="slide">
+          <header><span class="html">HTML</span> <h1>SVG example</h1></header>
+          <section>
+            <example style="margin-left: 150px; margin-top: 40px; padding: 0; width: 550px; height: 540px;">
+              <object type="image/svg+xml" style="border:none; width:550px; height:540px; background: white;" data="src/svg/famoustiger.svg"></object>
             </example>
           </section>
         </div>

@@ -1525,7 +1525,31 @@ document.getElementById("video").<b>play</b>();
           </section>
         </div>
         
-        <div class="slide" id="svg">
+        <div class="slide" id="canvas-3d">
+          <header><span class="html">HTML</span> <h1>Canvas 3D (WebGL)</h1></header>
+          <section>
+            <style>
+              #canvas {
+                background: white;
+                border-radius: 8px;
+                border: 1px solid #bbb;
+              }
+            </style>
+
+            <pre>&lt;canvas id="canvas" width="838" height="220"&gt;&lt;/canvas&gt;
+
+&lt;script&gt;
+  var gl = document.getElementById("canvas").<b>getContext</b>("experimental-webgl");
+  gl.<b>viewport</b>(0, 0, canvas.width, canvas.height);
+  ...
+&lt;/script&gt;
+            </pre>
+
+            <iframe style="border:none;width:100%; height:352px;" scrolling="no" src="src/webgl/san_angeles.html"></iframe>
+          </section>
+        </div>
+        
+        <div class="slide">
           <header><span class="html">HTML</span> <h1>SVG in HTML5</h1></header>
           <section>
             <style>
@@ -1537,14 +1561,13 @@ document.getElementById("video").<b>play</b>();
 
             <pre>&lt;html&gt;
   <b>&lt;svg&gt;
-    &lt;circle id="myCircle" class="important" cx="50%" cy="25%" r="100" 
-        fill="url(#myGradient)" stroke-color="red"
+    &lt;circle id="myCircle" class="important" cx="50%" cy="50%" r="100" 
+        fill="url(#myGradient)"
         onmousedown="alert('hello');"/&gt;
   &lt;/svg&gt;</b>
 &lt;/html&gt;</pre>
 
-            <div class="svg">
-            </div>
+            <div class="svg"></div>
 
           <script>
             // insert SVG using script until SVG in HTML5 is more widely supported
@@ -1553,6 +1576,8 @@ document.getElementById("video").<b>play</b>();
               var container = document.getElementsByClassName('svg')[0];
               var svgns = 'http://www.w3.org/2000/svg';
               var svg = document.createElementNS(svgns, 'svg');
+              svg.setAttribute('width', '300px');
+              svg.setAttribute('height', '300px');
               
               // our linearGradient
               var defs = document.createElementNS(svgns, 'defs');
@@ -1577,7 +1602,7 @@ document.getElementById("video").<b>play</b>();
               // our example circle
               var circle = document.createElementNS(svgns, 'circle');
               circle.setAttribute('cx', '50%');
-              circle.setAttribute('cy', '25%');
+              circle.setAttribute('cy', '50%');
               circle.setAttribute('r', 100);
               circle.setAttribute('fill', 'url(#myGradient)');
               circle.setAttribute('stroke-color', 'red');
@@ -1600,31 +1625,6 @@ document.getElementById("video").<b>play</b>();
             </example>
           </section>
         </div>
-
-        <div class="slide" id="canvas-3d">
-          <header><span class="html">HTML</span> <h1>Canvas 3D (WebGL)</h1></header>
-          <section>
-            <style>
-              #canvas {
-                background: white;
-                border-radius: 8px;
-                border: 1px solid #bbb;
-              }
-            </style>
-
-            <pre>&lt;canvas id="canvas" width="838" height="220"&gt;&lt;/canvas&gt;
-
-&lt;script&gt;
-  var gl = document.getElementById("canvas").<b>getContext</b>("experimental-webgl");
-  gl.<b>viewport</b>(0, 0, canvas.width, canvas.height);
-  ...
-&lt;/script&gt;
-            </pre>
-
-            <iframe style="border:none;width:100%; height:352px;" scrolling="no" src="src/webgl/san_angeles.html"></iframe>
-          </section>
-        </div>      
-
 
         <div class="slide">
           <header><span class="html">HTML</span></header>
